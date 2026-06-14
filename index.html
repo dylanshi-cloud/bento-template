@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Bento — Modular grid HTML template for portfolios and products." />
+  <title>Bento — Grid Template</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Satoshi:wght@400;500;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box}
+    :root{--bg:#F5F5F0;--bg-card:#FFFFFF;--text:#1A1A1A;--text-light:#6B6B6B;--accent:#2563EB;--accent-light:#DBEAFE;--radius:12px;--radius-sm:8px;--font:'Inter',sans-serif;--font-display:'Satoshi','Inter',sans-serif;--ease:cubic-bezier(0.22,1,0.36,1)}
+    html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased;background:var(--bg)}
+    body{font-family:var(--font);font-weight:400;font-size:0.95rem;line-height:1.6;color:var(--text);background:var(--bg);overflow-x:hidden}
+    .container{width:100%;max-width:1200px;margin:0 auto;padding:0 clamp(1.25rem,4vw,2.5rem)}
+    a{color:inherit;text-decoration:none;transition:color 0.2s}
+    ul{list-style:none}
+
+    .nav{padding:1.2rem 0;border-bottom:1px solid rgba(0,0,0,0.04)}
+    .nav__inner{display:flex;align-items:center;justify-content:space-between}
+    .nav__logo{font-family:var(--font-display);font-weight:700;font-size:1.2rem}
+    .nav__links{display:flex;gap:2rem;font-size:0.85rem;color:var(--text-light)}
+
+    .hero{padding:6rem 0 4rem}
+    .hero__badge{display:inline-flex;align-items:center;gap:0.4rem;padding:0.3rem 0.8rem;background:var(--accent-light);color:var(--accent);border-radius:100px;font-size:0.7rem;font-weight:500;margin-bottom:1.5rem}
+    .hero h1{font-family:var(--font-display);font-size:clamp(2.2rem,5vw,3.8rem);font-weight:700;line-height:1.1;letter-spacing:-0.02em;margin-bottom:1rem}
+    .hero p{font-size:1rem;color:var(--text-light);max-width:450px;margin-bottom:2rem}
+    .btn{display:inline-block;padding:0.7rem 1.8rem;border-radius:var(--radius-sm);font-size:0.85rem;font-weight:500;transition:all 0.3s;border:none;cursor:pointer;text-decoration:none}
+    .btn--primary{background:var(--accent);color:#fff}
+    .btn--primary:hover{background:#1D4ED8}
+
+    section{padding:clamp(3rem,6vw,5rem) 0}
+    .section-header{padding-bottom:2rem}
+    .section-tag{font-size:0.7rem;font-weight:600;text-transform:uppercase;letter-spacing:0.08em;color:var(--accent);margin-bottom:0.5rem}
+    .section-title{font-family:var(--font-display);font-size:clamp(1.5rem,3vw,2.2rem);font-weight:700;letter-spacing:-0.02em;margin-bottom:0.5rem}
+
+    /* Bento Grid */
+    .bento{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;grid-auto-rows:minmax(100px,auto)}
+    .bento__item{background:var(--bg-card);border-radius:var(--radius);padding:1.5rem;transition:all 0.3s var(--ease);border:1px solid rgba(0,0,0,0.04)}
+    .bento__item:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,0.04)}
+    .bento__item--wide{grid-column:span 2}
+    .bento__item--tall{grid-row:span 2}
+    .bento__item--featured{grid-column:span 2;grid-row:span 2;background:linear-gradient(135deg,var(--accent-light),#fff)}
+    .bento__icon{font-size:1.5rem;margin-bottom:0.8rem}
+    .bento__title{font-family:var(--font-display);font-size:1rem;font-weight:600;margin-bottom:0.3rem}
+    .bento__text{font-size:0.8rem;color:var(--text-light);line-height:1.5}
+    .bento__num{font-family:var(--font-display);font-size:2.5rem;font-weight:700;color:var(--accent);line-height:1}
+
+    .gallery{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem}
+    .gallery__item{aspect-ratio:1;background:var(--bg-card);border-radius:var(--radius);border:1px solid rgba(0,0,0,0.04);display:flex;align-items:center;justify-content:center;font-size:2rem;color:var(--text-light);transition:all 0.3s}
+    .gallery__item:hover{background:var(--accent-light);color:var(--accent);transform:scale(1.02)}
+    .gallery__item--wide{grid-column:span 2}
+
+    .pricing__grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
+    .pricing__card{background:var(--bg-card);border-radius:var(--radius);padding:2rem;border:1px solid rgba(0,0,0,0.04);text-align:center}
+    .pricing__card--featured{border-color:var(--accent);box-shadow:0 4px 20px rgba(37,99,235,0.08)}
+    .pricing__amount{font-family:var(--font-display);font-size:2.5rem;font-weight:700;margin:1rem 0}
+    .pricing__amount small{font-size:0.8rem;font-weight:400;color:var(--text-light)}
+    .pricing__features{list-style:none;margin:1rem 0;font-size:0.85rem}
+    .pricing__features li{padding:0.4rem 0;color:var(--text-light)}
+
+    .contact__form{max-width:480px;display:flex;gap:0.75rem}
+    .contact__input{flex:1;padding:0.8rem 1.2rem;border:1px solid rgba(0,0,0,0.08);border-radius:var(--radius-sm);font-size:0.9rem;outline:none}
+    .contact__input:focus{border-color:var(--accent)}
+
+    .footer{padding:3rem 0;border-top:1px solid rgba(0,0,0,0.04);color:var(--text-light);font-size:0.85rem;text-align:center}
+
+    .reveal{opacity:0;transform:translateY(16px);transition:opacity 0.5s var(--ease),transform 0.5s var(--ease)}
+    .reveal--visible{opacity:1;transform:translateY(0)}
+
+    @media(max-width:768px){.bento,.gallery,.pricing__grid{grid-template-columns:1fr}.bento__item--wide,.bento__item--featured,.bento__item--tall,.gallery__item--wide{grid-column:span 1;grid-row:span 1}.contact__form{flex-direction:column}}
+  </style>
+</head>
+<body>
+  <nav class="nav">
+    <div class="container nav__inner">
+      <a href="#" class="nav__logo">Bento</a>
+      <ul class="nav__links">
+        <li><a href="#work">Work</a></li>
+        <li><a href="#features">Features</a></li>
+        <li><a href="#pricing">Pricing</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <section class="hero">
+    <div class="container">
+      <div class="hero__badge">✦ Modular Grid System</div>
+      <h1>Organized by<br/>design.</h1>
+      <p>A bento-grid template for portfolios, products, and content-rich sites.</p>
+      <a href="#work" class="btn btn--primary">View Grid</a>
+    </div>
+  </section>
+
+  <section class="section" id="work">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-tag">The Grid</p>
+        <h2 class="section-title">Bento layout.</h2>
+      </div>
+      <div class="bento">
+        <div class="bento__item bento__item--featured">
+          <div class="bento__icon">◆</div>
+          <div class="bento__title">Featured Project</div>
+          <div class="bento__text">The hero spot — 2×2 tiles for your best work. Combines visual impact with the bento grid's signature asymmetry.</div>
+        </div>
+        <div class="bento__item"><div class="bento__icon">◈</div><div class="bento__title">Project</div><div class="bento__text">Standard card for secondary projects.</div></div>
+        <div class="bento__item"><div class="bento__icon">◇</div><div class="bento__title">Project</div><div class="bento__text">Compact tile with clean spacing.</div></div>
+        <div class="bento__item bento__item--wide"><div class="bento__icon">✦</div><div class="bento__title">Case Study</div><div class="bento__text">Wide format for detailed case studies. Perfect for process shots and timelines.</div></div>
+        <div class="bento__item"><div class="bento__icon">○</div><div class="bento__title">About</div><div class="bento__text">Compact bio card with key stats.</div></div>
+        <div class="bento__item bento__item--tall"><div class="bento__num">99%</div><div class="bento__title">Satisfaction</div><div class="bento__text">Tall card for metrics, testimonials, or vertical content.</div></div>
+        <div class="bento__item"><div class="bento__icon">▽</div><div class="bento__title">Contact</div><div class="bento__text">Quick reach-out card.</div></div>
+        <div class="bento__item bento__item--wide"><div class="bento__icon">⊡</div><div class="bento__title">Services</div><div class="bento__text">Wide layout for service descriptions or feature lists with more context.</div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="features">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-tag">Features</p>
+        <h2 class="section-title">Flexible by nature.</h2>
+      </div>
+      <div class="gallery">
+        <div class="gallery__item gallery__item--wide">✦</div>
+        <div class="gallery__item">01</div>
+        <div class="gallery__item">02</div>
+        <div class="gallery__item">03</div>
+        <div class="gallery__item">04</div>
+        <div class="gallery__item gallery__item--wide">✦ 4-Column Grid</div>
+        <div class="gallery__item">05</div>
+        <div class="gallery__item">06</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="pricing">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-tag">Pricing</p>
+        <h2 class="section-title">Choose your plan.</h2>
+      </div>
+      <div class="pricing__grid">
+        <div class="pricing__card"><h3>Lite</h3><div class="pricing__amount">Free</div><ul class="pricing__features"><li>Basic grid layout</li><li>Sample content</li></ul></div>
+        <div class="pricing__card pricing__card--featured"><h3>Pro</h3><div class="pricing__amount">¥199 <small>$29</small></div><ul class="pricing__features"><li>✓ Full template</li><li>✓ All grid variations</li><li>✓ Documentation</li><li>✓ Support</li></ul><a href="https://github.com/dylanshi-cloud/bento-template#-pricing" class="btn btn--primary">Buy Now</a></div>
+        <div class="pricing__card"><h3>Custom</h3><div class="pricing__amount">—</div><ul class="pricing__features"><li>Tailored grid</li><li>Custom content</li><li>Priority support</li></ul></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="contact">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">Get in touch</h2>
+        <p class="bento__text">Questions? Let's talk.</p>
+      </div>
+      <form class="contact__form"><input type="email" class="contact__input" placeholder="Your email" required /><button type="submit" class="btn btn--primary">Send</button></form>
+    </div>
+  </section>
+
+  <footer class="footer"><div class="container"><p style="font-family:var(--font-display);font-weight:700;font-size:1.1rem">Bento</p><p style="margin-top:0.3rem">Modular grid template.</p><p style="margin-top:1rem;font-size:0.75rem">&copy; 2026 Bento Template</p></div></footer>
+  <script src="js/main.js"></script>
+</body>
+</html>
